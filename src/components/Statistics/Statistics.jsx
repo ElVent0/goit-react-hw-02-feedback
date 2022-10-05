@@ -24,6 +24,8 @@ class Statistics extends Component {
           case 'positivePercentage':
             keyName = 'Positive feedback';
             break;
+          default:
+            console.log('Щось не так');
         }
         res.push({
           name: keyName,
