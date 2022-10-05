@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FeedbackOptions from './Feedback/FeedbackOptions';
 import Statistics from './Statistics/Statistics';
 import Section from './Section/Section';
+import Notification from './Notification/Notification';
 
 export class App extends Component {
   state = {
@@ -22,7 +23,7 @@ export class App extends Component {
 
   handleFeedback = e => {
     this.setState(prevState => ({
-      [e.target.textContent]: prevState[e.target.textContent] + 1,
+      [e.target.name]: prevState[e.target.name] + 1,
     }));
   };
 
@@ -46,15 +47,23 @@ export class App extends Component {
           neutral={this.state.neutral}
           bad={this.state.bad}
         >
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
-          ></Statistics>
+          {this.state.good !== 0 ||
+          this.state.neutral !== 0 ||
+          this.state.bad !== 0 ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            ></Statistics>
+          ) : (
+            <Notification message="There is no feedback"></Notification>
+          )}
         </Section>
       </>
     );
   }
 }
+
+// 3 - Зробити стилі

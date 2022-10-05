@@ -7,8 +7,26 @@ class Statistics extends Component {
       const res = [];
       const keys = Object.keys(obj);
       keys.forEach(key => {
+        let keyName;
+        switch (key) {
+          case 'good':
+            keyName = 'Good';
+            break;
+          case 'neutral':
+            keyName = 'Neutral';
+            break;
+          case 'bad':
+            keyName = 'Bad';
+            break;
+          case 'total':
+            keyName = 'Total';
+            break;
+          case 'positivePercentage':
+            keyName = 'Positive feedback';
+            break;
+        }
         res.push({
-          name: key,
+          name: keyName,
           value: obj[key],
         });
       });
@@ -18,10 +36,10 @@ class Statistics extends Component {
 
     return (
       <>
-        <ul>
+        <ul className={css.list}>
           {arrayOfData.map(item => {
             return (
-              <li key={item.name}>
+              <li key={item.name} className={css.item}>
                 {item.name}: {item.value}
               </li>
             );

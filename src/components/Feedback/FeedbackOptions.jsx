@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 
 class FeedbackOptions extends Component {
   render() {
+    function capitalize(word) {
+      return word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }
     const separateObject = obj => {
       const res = [];
       const keys = Object.keys(obj);
@@ -18,12 +21,16 @@ class FeedbackOptions extends Component {
 
     return (
       <>
-        <ul>
+        <ul className={css.list}>
           {arrayOfData.map(item => {
             return (
-              <li key={item.name}>
-                <button onClick={this.props.onLeaveFeedback}>
-                  {item.name}
+              <li key={item.name} className={css.item}>
+                <button
+                  name={item.name}
+                  className={css.button}
+                  onClick={this.props.onLeaveFeedback}
+                >
+                  {capitalize(item.name)}
                 </button>
               </li>
             );
