@@ -1,11 +1,13 @@
 import css from './FeedbackOptions.module.css';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class FeedbackOptions extends Component {
-  render() {
-    function capitalize(word) {
-      return word[0].toUpperCase() + word.slice(1).toLowerCase();
-    }
+  getCapitalize = word => {
+    return word[0].toUpperCase() + word.slice(1).toLowerCase();
+  };
+
+  getArrayOfData = () => {
     const separateObject = obj => {
       const res = [];
       const keys = Object.keys(obj);
@@ -18,11 +20,14 @@ class FeedbackOptions extends Component {
       return res;
     };
     const arrayOfData = separateObject(this.props.options);
+    return arrayOfData;
+  };
 
+  render() {
     return (
       <>
         <ul className={css.list}>
-          {arrayOfData.map(item => {
+          {this.getArrayOfData().map(item => {
             return (
               <li key={item.name} className={css.item}>
                 <button
@@ -30,7 +35,7 @@ class FeedbackOptions extends Component {
                   className={css.button}
                   onClick={this.props.onLeaveFeedback}
                 >
-                  {capitalize(item.name)}
+                  {this.getCapitalize(item.name)}
                 </button>
               </li>
             );
@@ -42,3 +47,8 @@ class FeedbackOptions extends Component {
 }
 
 export default FeedbackOptions;
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.object,
+  onLeaveFeedbac: PropTypes.func,
+};

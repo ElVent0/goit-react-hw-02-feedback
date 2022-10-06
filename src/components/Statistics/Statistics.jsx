@@ -1,8 +1,9 @@
 import css from './Statistics.module.css';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Statistics extends Component {
-  render() {
+  getArrayOfData = () => {
     const separateObject = obj => {
       const res = [];
       const keys = Object.keys(obj);
@@ -35,11 +36,14 @@ class Statistics extends Component {
       return res;
     };
     const arrayOfData = separateObject(this.props);
+    return arrayOfData;
+  };
 
+  render() {
     return (
       <>
         <ul className={css.list}>
-          {arrayOfData.map(item => {
+          {this.getArrayOfData().map(item => {
             return (
               <li key={item.name} className={css.item}>
                 {item.name}: {item.value}
@@ -53,3 +57,11 @@ class Statistics extends Component {
 }
 
 export default Statistics;
+
+Statistics.propTypes = {
+  good: PropTypes.number,
+  neutral: PropTypes.number,
+  bad: PropTypes.number,
+  total: PropTypes.number,
+  positivePercentage: PropTypes.number,
+};
