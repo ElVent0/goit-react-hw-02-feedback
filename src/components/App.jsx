@@ -27,29 +27,23 @@ export class App extends Component {
     }));
   };
 
+  countTotalExistingFeedback = () => {
+    return (
+      this.state.good !== 0 || this.state.neutral !== 0 || this.state.bad !== 0
+    );
+  };
+
   render() {
     return (
       <>
-        <Section
-          title="Please leave Feedback"
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-        >
+        <Section title="Please leave Feedback">
           <FeedbackOptions
             options={this.state}
             onLeaveFeedback={this.handleFeedback}
           ></FeedbackOptions>
         </Section>
-        <Section
-          title="Statistics"
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-        >
-          {this.state.good !== 0 ||
-          this.state.neutral !== 0 ||
-          this.state.bad !== 0 ? (
+        <Section title="Statistics">
+          {this.countTotalExistingFeedback() ? (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}

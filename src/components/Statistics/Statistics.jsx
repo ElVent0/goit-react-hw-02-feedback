@@ -7,7 +7,7 @@ class Statistics extends Component {
     const separateObject = obj => {
       const res = [];
       const keys = Object.keys(obj);
-      keys.forEach(key => {
+      keys.map(key => {
         let keyName;
         switch (key) {
           case 'good':
@@ -32,6 +32,7 @@ class Statistics extends Component {
           name: keyName,
           value: obj[key],
         });
+        return key;
       });
       return res;
     };

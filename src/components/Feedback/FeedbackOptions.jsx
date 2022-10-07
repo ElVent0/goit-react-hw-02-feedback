@@ -11,11 +11,12 @@ class FeedbackOptions extends Component {
     const separateObject = obj => {
       const res = [];
       const keys = Object.keys(obj);
-      keys.forEach(key => {
+      keys.map(key => {
         res.push({
           name: key,
           value: obj[key],
         });
+        return key;
       });
       return res;
     };
